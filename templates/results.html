@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% block title %}{{ quote }} · Forecast{% endblock %}
+{% block content %}
+<section class="results">
+  <div class="results-header">
+    <div>
+      <h1>{{ quote }}</h1>
+      <p class="muted">Last updated {{ last_updated }}</p>
+    </div>
+    <a class="btn-secondary" href="{{ url_for('index') }}">&larr; Search another stock</a>
+  </div>
+
+  <div class="stat-row">
+    <div class="stat-card">
+      <span class="stat-label">Current Price</span>
+      <span class="stat-value">{{ today_price }}</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-label">2Y Average Price</span>
+      <span class="stat-value">{{ mean_price }}</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-label">7-Day Forecast Avg</span>
+      <span class="stat-value">{{ forecast_avg }}</span>
+    </div>
+    <div class="stat-card recommendation-{{ recommendation|lower }}">
+      <span class="stat-label">Recommendation</span>
+      <span class="stat-value">{{ recommendation }}</span>
+    </div>
+  </div>
+  <p class="muted reason-text">{{ reason }}</p>
+
+  <div class="chart-block">
+    <h2>Price History</h2>
+    <img src="data:image/png;base64,{{ history_chart }}" alt="{{ quote }} price history chart" class="chart-img">
+  </div>
+
+  <div class="chart-block">
+    <h2>7-Day Forecast</h2>
+    <img src="data:image/png;base64,{{ forecast_chart }}" alt="{{ quote }} forecast chart" class="chart-img">
+  </div>
+
+  <div class="model-table-wrap">
+    <h2>Day-by-day model forecasts</h2>
+    <table class="model-table">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>ARIMA</th>
+          <th>LSTM</th>
+          <th>Linear Regression</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for date, a, l, r in forecast_table %}
+        <tr>
+          <td>{{ date }}</td>
+          <td>{{ a }}</td>
+          <td>{{ l }}</td>
+          <td>{{ r }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% if lstm_note %}<p class="note">LSTM note: {{ lstm_note }}</p>{% endif %}
+    {% if arima_note %}<p class="note">ARIMA note: {{ arima_note }}</p>{% endif %}
+    {% if linear_note %}<p class="note">Linear Regression note: {{ linear_note }}</p>{% endif %}
+  </div>
+</section>
+{% endblock %}

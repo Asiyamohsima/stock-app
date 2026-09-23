@@ -1,0 +1,13 @@
+flask
+pandas
+numpy
+matplotlib
+scikit-learn
+statsmodels
+yfinance
+python-dotenv
+
+# Optional: enables the real LSTM model. The app still runs and forecasts
+# without this (it falls back to exponential smoothing), but install it
+# for the full experience:
+tensorflow

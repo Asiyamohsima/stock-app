@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}Dashboard · StockSense{% endblock %}
+{% block content %}
+<section class="dashboard">
+  <h1>Market Dashboard</h1>
+  <p class="muted">A quick snapshot of a few widely-watched tickers, fetched live from Yahoo Finance.</p>
+
+  <div class="dashboard-grid">
+    {% for c in cards %}
+    <div class="dash-card {{ 'up' if c.up else 'down' }}">
+      <h3>{{ c.symbol }}</h3>
+      <p class="price">{{ c.price }}</p>
+      <p class="change">{{ '+' if c.up else '' }}{{ c.change }} ({{ c.pct }}%)</p>
+    </div>
+    {% else %}
+    <p>Live data is temporarily unavailable. Please try again shortly.</p>
+    {% endfor %}
+  </div>
+
+  <div class="dashboard-cta">
+    <p>Want a full 7-day forecast for a specific stock?</p>
+    <a class="btn-primary" href="{{ url_for('index') }}">Go to Predictor →</a>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}Contact Us · StockSense{% endblock %}
+{% block content %}
+<section class="contact">
+  <h1>Contact Us</h1>
+  <p>Questions, bug reports, or feature ideas? Send a note below and it'll land straight in our inbox.</p>
+
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      {% for category, msg in messages %}
+        <p class="{{ 'success-msg' if category == 'success' else 'error-msg' }}">{{ msg }}</p>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+
+  <form method="POST" class="contact-form">
+    <label>Name
+      <input type="text" name="name" required>
+    </label>
+    <label>Email
+      <input type="email" name="email" required>
+    </label>
+    <label>Message
+      <textarea name="message" rows="5" required></textarea>
+    </label>
+    <button type="submit">Send Message</button>
+  </form>
+</section>
+{% endblock %}

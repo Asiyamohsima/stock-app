@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title %}About · StockSense{% endblock %}
+{% block content %}
+<section class="about">
+  <h1>About StockSense</h1>
+  <p class="lead">
+    StockSense is a stock market prediction app that uses an <strong>LSTM
+    (Long Short-Term Memory) deep learning model</strong> to forecast where a
+    stock's price is headed over the next 7 trading days. Just type in a
+    ticker — from NASDAQ or the NSE — and get an instant forecast, chart, and
+    a simple Buy / Sell / Hold call.
+  </p>
+
+  <h2>What you can do here</h2>
+  <ul class="about-list">
+    <li><strong>Search any stock</strong> — enter a symbol like <code>AAPL</code>, <code>TSLA</code>, <code>TCS</code>, or <code>INFY</code> and get results in seconds.</li>
+    <li><strong>See a 7-day forecast</strong> — powered primarily by an LSTM neural network trained on that stock's own recent price history.</li>
+    <li><strong>Compare against other models</strong> — ARIMA and Linear Regression forecasts are shown alongside the LSTM prediction, so you can see how they agree or differ.</li>
+    <li><strong>Track a live dashboard</strong> — quick snapshot cards for a handful of popular stocks, updated in real time.</li>
+    <li><strong>Get in touch</strong> — questions or feedback go straight to us via the Contact page.</li>
+  </ul>
+
+  <h2>Why LSTM?</h2>
+  <p>
+    Stock prices are a sequence — today's price depends on yesterday's, last
+    week's, and the broader trend before that. LSTM networks are a type of
+    recurrent neural network built specifically to learn from sequences like
+    this, which makes them a natural fit for price forecasting compared to
+    models that treat each day in isolation.
+  </p>
+
+  <h2>The team</h2>
+  <p>
+    StockSense was built as a project applying LSTM-based deep learning to
+    real-world stock market data, combining a Flask web app with live data
+    from Yahoo Finance.
+  </p>
+
+  <p class="disclaimer">StockSense is for educational purposes only and is not financial advice. Markets are volatile and no model can guarantee future prices.</p>
+</section>
+{% endblock %}

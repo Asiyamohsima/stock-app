@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}Home · StockSense{% endblock %}
+{% block content %}
+<section class="hero">
+  <h1>Predict tomorrow's stock price, today.</h1>
+  <p>Enter any NASDAQ or NSE ticker to get a 7-day price forecast built from ARIMA, LSTM and Linear Regression models — trained fresh on that stock's own history every time.</p>
+
+  <form action="{{ url_for('insertintotable') }}" method="POST" class="search-form">
+    <input
+      type="text"
+      name="nm"
+      placeholder="e.g. AAPL, MSFT, TCS, INFY"
+      value="{{ searched_symbol or '' }}"
+      autocomplete="off"
+      required>
+    <button type="submit">Predict</button>
+  </form>
+
+  {% if not_found %}
+  <p class="error-msg">
+    Couldn't find data for "<strong>{{ searched_symbol }}</strong>". Double‑check the ticker
+    (e.g. use <code>TCS</code> for Tata Consultancy on the NSE, or <code>AAPL</code> for Apple on NASDAQ).
+  </p>
+  {% endif %}
+
+  <div class="chip-row">
+    <span>Try:</span>
+    <a class="chip" href="#" onclick="fillSymbol('AAPL')">AAPL</a>
+    <a class="chip" href="#" onclick="fillSymbol('MSFT')">MSFT</a>
+    <a class="chip" href="#" onclick="fillSymbol('TSLA')">TSLA</a>
+    <a class="chip" href="#" onclick="fillSymbol('INFY')">INFY</a>
+    <a class="chip" href="#" onclick="fillSymbol('TCS')">TCS</a>
+  </div>
+</section>
+
+{% endblock %}
